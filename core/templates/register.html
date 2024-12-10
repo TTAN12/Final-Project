@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+  
+
+<br>
+<h1 style="margin-left: 50px;">Register</h1>
+<form method="POST" style="margin:25px 50px">
+    {% csrf_token %}
+
+    <!-- Name input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      {{form.username}}
+      <label class="form-label" for="form2Example1">Username</label>
+    </div>
+
+    <!-- Email input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      {{form.email}}
+      <label class="form-label" for="form2Example1">Email address</label>
+    </div>
+  
+    <!-- Password input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      {{form.password1}}
+      <label class="form-label" for="form2Example2">Password</label>
+    </div>
+    
+    <!-- Confirm Password input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      {{form.password2}}
+      <label class="form-label" for="form2Example2">Confirm Password</label>
+    </div>
+
+    <!-- Submit button -->
+    <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Register</button>
+
+    {{form.errors}}
+
+    <!-- Login button -->
+    <div class="text-center">
+      <p>Already have an account? <a href="/login/">Log in</a></p>
+    
+    </div>
+
+    </div>
+  </form>
+
+{% endblock %}
+
+
+	

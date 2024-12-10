@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+<h1 style="margin-left: 50px;">Login</h1>
+<form style="margin:25px 50px" method="POST">
+    {% csrf_token %}
+    <!-- Email input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      <input type="text" name="username" class="form-control" placeholder="Username" required />
+      <label class="form-label" for="form2Example1">Username</label>
+    </div>
+  
+    <!-- Password input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      <input type="password" name="password" class="form-control" placeholder="Password" required />
+      <label class="form-label" for="form2Example2">Password</label>
+    </div>
+  
+    <!-- Submit button -->
+    <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign in</button>
+  
+    {% for message in messages %}
+    <p id="messages"> {{message}} </p>
+    {% endfor %}
+
+    <!-- Register buttons -->
+    <div class="text-center">
+      <p>Not a member? <a href="/register/">Register</a></p>
+    
+    </div>
+</form>
+
+{% endblock %}
+
+
+	

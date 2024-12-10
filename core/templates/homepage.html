@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Start Hero Section -->
+<div class="hero" style="padding:25px 0;">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Shop</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<!-- Product Section -->
+<div class="prodgrid">
+    <!-- Search Bar -->
+    <form method="GET" action="{% url 'homepage' %}" class="searchbar">
+        <div class="input-group pg">
+            <input type="search" class="form-control rounded" name="search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" value="{{ search_query }}">
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Filter and Sort Section -->
+    <div class="filter-bar">
+        <h3>Filter</h3>
+        <form method="GET" action="{% url 'homepage' %}">
+            <!-- Sort Options -->
+            <p>Sort By:</p>
+            <input type="radio" id="price_asc" name="sort" value="price_asc" {% if sort_by == 'price_asc' %}checked{% endif %}>
+            <label for="price_asc">Lowest Price</label><br>
+            <input type="radio" id="price_desc" name="sort" value="price_desc" {% if sort_by == 'price_desc' %}checked{% endif %}>
+            <label for="price_desc">Highest Price</label><br>
+            <input type="radio" id="name_asc" name="sort" value="name_asc" {% if sort_by == 'name_asc' %}checked{% endif %}>
+            <label for="name_asc">Name A-Z</label><br>
+            <input type="radio" id="name_desc" name="sort" value="name_desc" {% if sort_by == 'name_desc' %}checked{% endif %}>
+            <label for="name_desc">Name Z-A</label><br>
+
+            <!-- Filter Categories -->
+            <p>Filter By Category:</p>
+            <input type="checkbox" id="tools" name="category" value="Tools" {% if 'Tools' in filters %}checked{% endif %}>
+            <label for="tools">Tools</label><br>
+            <input type="checkbox" id="materials" name="category" value="Materials" {% if 'Materials' in filters %}checked{% endif %}>
+            <label for="materials">Materials</label><br>
+            <input type="checkbox" id="electrical" name="category" value="Electrical" {% if 'Electrical' in filters %}checked{% endif %}>
+            <label for="electrical">Electrical</label><br><br>
+
+            <button type="submit" class="btn btn-outline-primary">Apply Filters</button>
+        </form>
+    </div>
+
+    <!-- Product Listing -->
+    <div class="untree_co-section product-section before-footer-section">
+        <div class="container">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-12 col-md-4 col-lg-3 mb-5">
+                    <a class="product-item" href="/prod/{{ product.id }}" style="padding-bottom: 10px;">
+                        <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}" style="width: 200px;">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        <strong class="product-price">P{{ product.price }}</strong>
+                    </a>
+                    <button class="add-to-cart-btn" value="{{ product.id }}">Add to cart</button>
+                </div>
+                {% empty %}
+                <p>No products found matching the criteria.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div> <!-- End prodgrid div -->
+
+<div class="before-footer-section"></div>
+<script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}

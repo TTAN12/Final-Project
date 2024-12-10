@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+<div style="margin-left: 50px;">
+    <h1>Your Account</h1>
+
+    <h2>Username</h2>
+    <p>{{user.usermane}}</p>
+    <h2>Email</h2>
+    <p>{{user.email}}</p>
+
+    <br>
+    
+    <h2>Orders</h2>
+    {% for i in orders %}
+        <p>{{i}}</p>
+    {% endfor%}
+</div>
+
+{% endblock %}
+
+
+	
